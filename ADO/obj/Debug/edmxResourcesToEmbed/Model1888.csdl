@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VpProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="StudentSubject">
+    <Key>
+      <PropertyRef Name="sid" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="sid" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="VpProjectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="StudentSubjects" EntityType="Self.StudentSubject" />
+    <EntitySet Name="Admins" EntityType="VpProjectModel.Admin" />
+    <EntitySet Name="StudentAttendances" EntityType="VpProjectModel.StudentAttendance" />
+    <EntitySet Name="StudentResults" EntityType="VpProjectModel.StudentResult" />
+    <EntitySet Name="Students" EntityType="VpProjectModel.Student" />
+    <EntitySet Name="Subjects" EntityType="VpProjectModel.Subject" />
+    <EntitySet Name="Teachers" EntityType="VpProjectModel.Teacher" />
+    <AssociationSet Name="FK__StudentAt__St_Id__2A164134" Association="VpProjectModel.FK__StudentAt__St_Id__2A164134">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentAt__Su_Id__2B0A656D" Association="VpProjectModel.FK__StudentAt__Su_Id__2B0A656D">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__St_Id__2DE6D218" Association="VpProjectModel.FK__StudentRe__St_Id__2DE6D218">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentResult" EntitySet="StudentResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Su_Id__2EDAF651" Association="VpProjectModel.FK__StudentRe__Su_Id__2EDAF651">
+      <End Role="Subject" EntitySet="Subjects" />
+      <End Role="StudentResult" EntitySet="StudentResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subject__Teacher__08B54D69" Association="VpProjectModel.FK__Subject__Teacher__08B54D69">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Subject" EntitySet="Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="StudentSubject1" Association="VpProjectModel.StudentSubject1">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Subject" EntitySet="Subjects" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="Int32" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StudentAttendance">
+    <Key>
+      <PropertyRef Name="St_Id" />
+      <PropertyRef Name="Su_Id" />
+      <PropertyRef Name="DateOfClass" />
+    </Key>
+    <Property Name="St_Id" Type="Int32" Nullable="false" />
+    <Property Name="St_Section" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Su_Id" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="DateOfClass" Type="DateTime" Nullable="false" Precision="7" />
+    <NavigationProperty Name="Student" Relationship="VpProjectModel.FK__StudentAt__St_Id__2A164134" FromRole="StudentAttendance" ToRole="Student" />
+    <NavigationProperty Name="Subject" Relationship="VpProjectModel.FK__StudentAt__Su_Id__2B0A656D" FromRole="StudentAttendance" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="StudentResult">
+    <Key>
+      <PropertyRef Name="St_Id" />
+      <PropertyRef Name="Su_Id" />
+    </Key>
+    <Property Name="St_Id" Type="Int32" Nullable="false" />
+    <Property Name="Su_Id" Type="Int32" Nullable="false" />
+    <Property Name="Mid" Type="Int32" />
+    <Property Name="Internal" Type="Int32" />
+    <Property Name="Final" Type="Int32" />
+    <Property Name="Grade" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Lab" Type="Int32" />
+    <NavigationProperty Name="Student" Relationship="VpProjectModel.FK__StudentRe__St_Id__2DE6D218" FromRole="StudentResult" ToRole="Student" />
+    <NavigationProperty Name="Subject" Relationship="VpProjectModel.FK__StudentRe__Su_Id__2EDAF651" FromRole="StudentResult" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Semester" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Section" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Guardian" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pass" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StudentAttendances" Relationship="VpProjectModel.FK__StudentAt__St_Id__2A164134" FromRole="Student" ToRole="StudentAttendance" />
+    <NavigationProperty Name="StudentResults" Relationship="VpProjectModel.FK__StudentRe__St_Id__2DE6D218" FromRole="Student" ToRole="StudentResult" />
+    <NavigationProperty Name="Subjects" Relationship="VpProjectModel.StudentSubject1" FromRole="Student" ToRole="Subject" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreditHour" Type="Int32" />
+    <Property Name="TotalMarks" Type="Int32" />
+    <NavigationProperty Name="StudentAttendances" Relationship="VpProjectModel.FK__StudentAt__Su_Id__2B0A656D" FromRole="Subject" ToRole="StudentAttendance" />
+    <NavigationProperty Name="StudentResults" Relationship="VpProjectModel.FK__StudentRe__Su_Id__2EDAF651" FromRole="Subject" ToRole="StudentResult" />
+    <NavigationProperty Name="Teacher" Relationship="VpProjectModel.FK__Subject__Teacher__08B54D69" FromRole="Subject" ToRole="Teacher" />
+    <NavigationProperty Name="Students" Relationship="VpProjectModel.StudentSubject1" FromRole="Subject" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Qualification" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Experience" Type="Int32" />
+    <Property Name="Pass" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Subjects" Relationship="VpProjectModel.FK__Subject__Teacher__08B54D69" FromRole="Teacher" ToRole="Subject" />
+  </EntityType>
+  <Association Name="FK__StudentAt__St_Id__2A164134">
+    <End Type="VpProjectModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="VpProjectModel.StudentAttendance" Role="StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="St_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentAt__Su_Id__2B0A656D">
+    <End Type="VpProjectModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="VpProjectModel.StudentAttendance" Role="StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="Su_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__St_Id__2DE6D218">
+    <End Type="VpProjectModel.Student" Role="Student" Multiplicity="1" />
+    <End Type="VpProjectModel.StudentResult" Role="StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="St_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Su_Id__2EDAF651">
+    <End Type="VpProjectModel.Subject" Role="Subject" Multiplicity="1" />
+    <End Type="VpProjectModel.StudentResult" Role="StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="Su_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subject__Teacher__08B54D69">
+    <End Type="VpProjectModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+    <End Type="VpProjectModel.Subject" Role="Subject" Multiplicity="*" />
+  </Association>
+  <Association Name="StudentSubject1">
+    <End Type="VpProjectModel.Student" Role="Student" Multiplicity="*" />
+    <End Type="VpProjectModel.Subject" Role="Subject" Multiplicity="*" />
+  </Association>
+</Schema>

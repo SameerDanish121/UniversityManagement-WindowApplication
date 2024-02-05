@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="VpProjectModelStoreContainer" CdmEntityContainer="VpProjectEntities">
+    <EntitySetMapping Name="StudentSubjects">
+      <EntityTypeMapping TypeName="VpProjectModel.StudentSubject">
+        <MappingFragment StoreEntitySet="StudentSubject">
+          <ScalarProperty Name="sid" ColumnName="sid" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="VpProjectModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentAttendances">
+      <EntityTypeMapping TypeName="VpProjectModel.StudentAttendance">
+        <MappingFragment StoreEntitySet="StudentAttendance">
+          <ScalarProperty Name="DateOfClass" ColumnName="DateOfClass" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Su_Id" ColumnName="Su_Id" />
+          <ScalarProperty Name="St_Section" ColumnName="St_Section" />
+          <ScalarProperty Name="St_Id" ColumnName="St_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StudentResults">
+      <EntityTypeMapping TypeName="VpProjectModel.StudentResult">
+        <MappingFragment StoreEntitySet="StudentResult">
+          <ScalarProperty Name="Lab" ColumnName="Lab" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="Final" ColumnName="Final" />
+          <ScalarProperty Name="Internal" ColumnName="Internal" />
+          <ScalarProperty Name="Mid" ColumnName="Mid" />
+          <ScalarProperty Name="Su_Id" ColumnName="Su_Id" />
+          <ScalarProperty Name="St_Id" ColumnName="St_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="VpProjectModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="Guardian" ColumnName="Guardian" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="Semester" ColumnName="Semester" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="sid" ColumnName="sid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Subjects">
+      <EntityTypeMapping TypeName="VpProjectModel.Subject">
+        <MappingFragment StoreEntitySet="Subject">
+          <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+          <ScalarProperty Name="CreditHour" ColumnName="CreditHour" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="VpProjectModel.Teacher">
+        <MappingFragment StoreEntitySet="Teacher">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+          <ScalarProperty Name="Experience" ColumnName="Experience" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK__Subject__Teacher__08B54D69" TypeName="VpProjectModel.FK__Subject__Teacher__08B54D69" StoreEntitySet="Subject">
+      <EndProperty Name="Subject">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <EndProperty Name="Teacher">
+        <ScalarProperty Name="tid" ColumnName="TeacherId" />
+      </EndProperty>
+      <Condition ColumnName="TeacherId" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StudentSubject1" TypeName="VpProjectModel.StudentSubject1" StoreEntitySet="StudentSubject">
+      <EndProperty Name="Subject">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="sid" ColumnName="sid" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

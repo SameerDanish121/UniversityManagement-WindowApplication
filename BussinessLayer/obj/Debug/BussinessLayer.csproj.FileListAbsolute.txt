@@ -1,0 +1,10 @@
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\bin\Debug\BussinessLayer.dll
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\bin\Debug\BussinessLayer.pdb
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\bin\Debug\DataLayer.dll
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\bin\Debug\DataLayer.pdb
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\obj\Debug\BussinessLayer.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\obj\Debug\BussinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\obj\Debug\BussinessLayer.csproj.CopyComplete
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\obj\Debug\BussinessLayer.dll
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\obj\Debug\BussinessLayer.pdb
+C:\Users\hp\source\repos\ProjectVP\BussinessLayer\bin\Debug\DataLayer.dll.config

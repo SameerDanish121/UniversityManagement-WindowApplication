@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="VpProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="int" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="StudentAttendance">
+    <Key>
+      <PropertyRef Name="St_Id" />
+      <PropertyRef Name="Su_Id" />
+      <PropertyRef Name="DateOfClass" />
+    </Key>
+    <Property Name="St_Id" Type="int" Nullable="false" />
+    <Property Name="St_Section" Type="varchar" MaxLength="10" />
+    <Property Name="Su_Id" Type="int" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="2" />
+    <Property Name="DateOfClass" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentResult">
+    <Key>
+      <PropertyRef Name="St_Id" />
+      <PropertyRef Name="Su_Id" />
+    </Key>
+    <Property Name="St_Id" Type="int" Nullable="false" />
+    <Property Name="Su_Id" Type="int" Nullable="false" />
+    <Property Name="Mid" Type="int" />
+    <Property Name="Internal" Type="int" />
+    <Property Name="Final" Type="int" />
+    <Property Name="Grade" Type="varchar" MaxLength="5" />
+    <Property Name="Remarks" Type="varchar" MaxLength="20" />
+    <Property Name="Lab" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="sid" />
+    </Key>
+    <Property Name="sid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" />
+    <Property Name="Semester" Type="varchar" MaxLength="30" />
+    <Property Name="Section" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Guardian" Type="varchar" MaxLength="50" />
+    <Property Name="Pass" Type="int" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="StudentSubject">
+    <Key>
+      <PropertyRef Name="sid" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="sid" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="CreditHour" Type="int" />
+    <Property Name="TeacherId" Type="int" />
+    <Property Name="TotalMarks" Type="int" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Qualification" Type="varchar" MaxLength="10" />
+    <Property Name="Salary" Type="varchar" MaxLength="50" />
+    <Property Name="Experience" Type="int" />
+    <Property Name="Pass" Type="int" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__StudentAt__St_Id__2A164134">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="St_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentAt__Su_Id__2B0A656D">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="StudentAttendance" Type="Self.StudentAttendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentAttendance">
+        <PropertyRef Name="Su_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__St_Id__2DE6D218">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentResult" Type="Self.StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="St_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentRe__Su_Id__2EDAF651">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="StudentResult" Type="Self.StudentResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentResult">
+        <PropertyRef Name="Su_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentSubj__sid__3864608B">
+    <End Role="Students" Type="Self.Students" Multiplicity="1" />
+    <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="sid" />
+      </Principal>
+      <Dependent Role="StudentSubject">
+        <PropertyRef Name="sid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentSubje__Id__395884C4">
+    <End Role="Subject" Type="Self.Subject" Multiplicity="1" />
+    <End Role="StudentSubject" Type="Self.StudentSubject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subject">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StudentSubject">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subject__Teacher__08B54D69">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Subject" Type="Self.Subject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="tid" />
+      </Principal>
+      <Dependent Role="Subject">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="VpProjectModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentAttendance" EntityType="Self.StudentAttendance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentResult" EntityType="Self.StudentResult" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StudentSubject" EntityType="Self.StudentSubject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__StudentAt__St_Id__2A164134" Association="Self.FK__StudentAt__St_Id__2A164134">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentAt__Su_Id__2B0A656D" Association="Self.FK__StudentAt__Su_Id__2B0A656D">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="StudentAttendance" EntitySet="StudentAttendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__St_Id__2DE6D218" Association="Self.FK__StudentRe__St_Id__2DE6D218">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentResult" EntitySet="StudentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentRe__Su_Id__2EDAF651" Association="Self.FK__StudentRe__Su_Id__2EDAF651">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="StudentResult" EntitySet="StudentResult" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentSubj__sid__3864608B" Association="Self.FK__StudentSubj__sid__3864608B">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="StudentSubject" EntitySet="StudentSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentSubje__Id__395884C4" Association="Self.FK__StudentSubje__Id__395884C4">
+      <End Role="Subject" EntitySet="Subject" />
+      <End Role="StudentSubject" EntitySet="StudentSubject" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subject__Teacher__08B54D69" Association="Self.FK__Subject__Teacher__08B54D69">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Subject" EntitySet="Subject" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
